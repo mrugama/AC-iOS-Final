@@ -17,6 +17,7 @@ class UploadVC: UIViewController {
         configNav()
         setupUploadView()
         uploadView.uploadButton.addTarget(self, action: #selector(openMenuPhotos), for: .touchUpInside)
+        StorageService.manager.delegate = self
     }
 
     private func configNav() {
@@ -36,8 +37,6 @@ class UploadVC: UIViewController {
         guard let comment = uploadView.commentTextView.text else {print("No comment"); return}
         guard let image = uploadView.uploadImageView.image else {print("No image");return}
         PostService.manager.saveNewPost(content: comment, image: image)
-        customMessage(title: "Image Saved", message: "Image saved succeed")
-        uploadView.resetView()
     }
     
     func customMessage(title: String, message: String) {
@@ -86,3 +85,14 @@ extension UploadVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
     }
 }
 
+extension UploadVC: StorageServiceDelegate {
+    func uploadImageProgress(progress: Float) {
+        uploadView.progressBar.isHidden = false
+        uploadView.progressBar.progress = progress
+    }
+    func didImageSave() {
+        uploadView.progressBar.isHidden = true
+        self.customMessage(title: "Image Saved", message: "Image saved succeed")
+        uploadView.resetView()
+    }
+}

@@ -12,6 +12,7 @@ import FirebaseStorage
 @objc protocol StorageServiceDelegate: class {
     @objc optional func didImageSave()
     @objc optional func didFailImageSave(error: Error)
+    @objc optional func uploadImageProgress(progress: Float)
 }
 
 class StorageService {

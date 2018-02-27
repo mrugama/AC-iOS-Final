@@ -33,10 +33,17 @@ class UploadView: UIView {
         return text
     }()
     
+    lazy var progressBar: UIProgressView = {
+        let pb = UIProgressView()
+        pb.progress = 0.0
+        return pb
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupInit()
         resetView()
+        progressBar.isHidden = true
         commentTextView.delegate = self
     }
     
@@ -57,6 +64,13 @@ class UploadView: UIView {
             make.width.height.equalTo(snp.width)
             make.top.equalTo(snp.top)
             make.centerX.equalTo(snp.centerX)
+        }
+        
+        addSubview(progressBar)
+        progressBar.snp.makeConstraints { (make) in
+            make.centerX.equalTo(uploadImageView.snp.centerX)
+            make.centerY.equalTo(uploadImageView.snp.centerY)
+            make.width.equalTo(uploadImageView.snp.width).multipliedBy(0.5)
         }
         
         addSubview(uploadButton)

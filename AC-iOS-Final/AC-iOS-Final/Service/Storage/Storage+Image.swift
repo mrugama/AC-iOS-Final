@@ -22,7 +22,7 @@ extension StorageService {
             if let error = error {
                 self.delegate?.didFailImageSave?(error: error)
             } else if let _ = storageMetadata {
-                self.delegate?.didImageSave?()
+                //self.delegate?.didImageSave?()
             }
         }
         
@@ -37,9 +37,9 @@ extension StorageService {
         
         uploadTask.observe(.progress) { snapshot in
             // Upload reported progress
-            let percentProgress = 100.0 * Double(snapshot.progress!.completedUnitCount)
-                / Double(snapshot.progress!.totalUnitCount)
-            print(percentProgress)
+            let percentProgress = Float(100.0 * Double(snapshot.progress!.completedUnitCount)
+                / Double(snapshot.progress!.totalUnitCount))
+            self.delegate?.uploadImageProgress?(progress: percentProgress)
         }
         
         uploadTask.observe(.success) { snapshot in
@@ -50,6 +50,7 @@ extension StorageService {
             if let postId = postId {
                 PostService.manager.getPostsRef().child("\(postId)/imageURL").setValue(imageURL)
             }
+            self.delegate?.didImageSave?()
         }
         
         uploadTask.observe(.failure) { snapshot in
