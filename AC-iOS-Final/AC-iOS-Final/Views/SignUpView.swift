@@ -41,9 +41,9 @@ class SignUpView: UIView {
     
     lazy var loginButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Login / ", for: .normal)
+        button.setTitle("Login", for: .normal)
         button.setTitleColor(UIColor.init(red: 116/255, green: 196/255, blue: 247/255, alpha: 1), for: UIControlState.normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -52,14 +52,14 @@ class SignUpView: UIView {
         let button = UIButton()
         button.setTitle("SignUp", for: .normal)
         button.setTitleColor(UIColor.init(red: 116/255, green: 196/255, blue: 247/255, alpha: 1), for: UIControlState.normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 28)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     lazy var buttonsStackView: UIStackView = {
         let stView = UIStackView()
-        stView.axis  = UILayoutConstraintAxis.horizontal
+        stView.axis  = UILayoutConstraintAxis.vertical
         stView.distribution  = .fillEqually
         stView.alignment = UIStackViewAlignment.center
         stView.spacing   = 0.0
@@ -106,7 +106,7 @@ class SignUpView: UIView {
             make.centerX.equalTo(snp.centerX)
         }
         
-        buttonsStackView.addArrangedSubview(loginButton)
         buttonsStackView.addArrangedSubview(signUpButton)
+        buttonsStackView.addArrangedSubview(loginButton)
     }
 }
