@@ -12,9 +12,6 @@ class FeedView: UIView {
 
     lazy var feedTableView: UITableView = {
         let table = UITableView()
-        //table.autoresizesSubviews = true
-//        table.estimatedRowHeight = self.bounds.width * 1.2
-//        table.rowHeight = UITableViewAutomaticDimension
         table.register(FeedTableViewCell.self, forCellReuseIdentifier: "PostCell")
         return table
     }()

@@ -42,8 +42,15 @@ class LoginLogoView: UIView {
         guard let userName = signUpView.userTextField.text else {print("Empty userName");return}
         guard let email = signUpView.emailTextField.text else {print("Empty email"); return}
         guard let password = signUpView.passwordTextField.text else {print("Empty password"); return}
+        UIView.transition(from: signUpView,
+                          to: signInView,
+                          duration: 1.0,
+                          options: [.transitionFlipFromRight,
+                                    .showHideTransitionViews],
+                          completion: { isAnimated in
+                            self.signUpView.isHidden = true
+        })
         delegate?.didSignUpButtonPressed?(userName, email, password)
-        
     }
     
     @objc private func signInButtonPressed() {
@@ -51,7 +58,6 @@ class LoginLogoView: UIView {
         guard let password = signInView.passwordTextField.text else {print("Empty password"); return}
         print("SignIn button pressed")
         delegate?.didSignInButtonPressed?(email, password)
-        //authUserService.signIn(email: email, password: password)
     }
     
     private func configInit() {
@@ -64,8 +70,11 @@ class LoginLogoView: UIView {
                           duration: 1.0,
                           options: [.transitionFlipFromRight,
                                     .showHideTransitionViews],
-                          completion: nil)
+                          completion: { isAnimated in
+                            self.signInView.isHidden = true
+        })
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -35,8 +35,8 @@ class PostService {
     public func getPostsRef() -> DatabaseReference {return postRef}
     
     public func getPosts(completionHandler: @escaping ([Post]) -> Void) {
-        var posts = [Post]()
         postRef.observe(.value) { (snapShot) in
+            var posts = [Post]()
             for post in snapShot.children {
                 let newPost = Post(snapShot: post as! DataSnapshot)
                 posts.insert(newPost, at: 0)

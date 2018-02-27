@@ -19,6 +19,7 @@ class PostView: UIView {
     lazy var commentLabel: UILabel = {
         let label = UILabel()
         label.text = "No Comment"
+        label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         return label
     }()
@@ -32,10 +33,14 @@ class PostView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        commentLabel.setNeedsLayout()
+    }
+    
     private func setupInit() {
         addSubview(postImage)
         postImage.translatesAutoresizingMaskIntoConstraints = false
-        postImage.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        postImage.widthAnchor.constraint(equalTo: self.widthAnchor, constant: 8).isActive = true
         postImage.heightAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         postImage.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         postImage.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
@@ -44,6 +49,7 @@ class PostView: UIView {
         commentLabel.translatesAutoresizingMaskIntoConstraints = false
         commentLabel.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: 8).isActive = true
         commentLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        commentLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8)
+        commentLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
+        commentLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8).isActive = true
     }
 }

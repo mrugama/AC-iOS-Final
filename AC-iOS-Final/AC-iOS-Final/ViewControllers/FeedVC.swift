@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class FeedVC: UIViewController {
 
@@ -19,19 +20,20 @@ class FeedVC: UIViewController {
         }
     }
     
+    let firebaseAuth = Auth.auth()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configNav()
         configFeedView()
-        //feedView.feedTableView.delegate = self
+        feedView.feedTableView.delegate = self
         feedView.feedTableView.dataSource = self
         loadData()
-        self.feedView.feedTableView.rowHeight = UITableViewAutomaticDimension
-//        self.feedView.feedTableView.estimatedRowHeight = view.bounds.width * 1.3//(view.bounds.width / 3) + 10
     }
     
     private func loadData() {
         PostService.manager.getPosts { (posts) in
+            self.posts = []
             self.posts = posts
         }
     }
@@ -39,12 +41,25 @@ class FeedVC: UIViewController {
     private func configNav() {
         view.backgroundColor = .white
         navigationItem.title = "Unit6Final-staGram"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "SignOut", style: .done, target: self, action: #selector(signOutButtonPressed))
     }
     
     private func configFeedView() {
         view.addSubview(feedView)
         feedView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
+        }
+    }
+    
+    @objc private func signOutButtonPressed() {
+        
+        do {
+            try Auth.auth().signOut()
+            let loginVC = LoginVC()
+            self.present(loginVC, animated: true, completion: nil)
+        }
+        catch {
+            customMessage(title: "LogOut failed", message: error.localizedDescription)
         }
     }
     
@@ -57,12 +72,9 @@ class FeedVC: UIViewController {
 }
 
 extension FeedVC: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return view.bounds.width * 2.5
-//    }
-    
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.bounds.width * 1.5
+        //UITableViewAutomaticDimension
+        return UITableViewAutomaticDimension
     }
 }
 
