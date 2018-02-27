@@ -39,6 +39,15 @@ class SignUpView: UIView {
         return tf
     }()
     
+    lazy var loginButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Login / ", for: .normal)
+        button.setTitleColor(UIColor.init(red: 116/255, green: 196/255, blue: 247/255, alpha: 1), for: UIControlState.normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     lazy var signUpButton: UIButton = {
         let button = UIButton()
         button.setTitle("SignUp", for: .normal)
@@ -46,6 +55,15 @@ class SignUpView: UIView {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    lazy var buttonsStackView: UIStackView = {
+        let stView = UIStackView()
+        stView.axis  = UILayoutConstraintAxis.horizontal
+        stView.distribution  = .fillEqually
+        stView.alignment = UIStackViewAlignment.center
+        stView.spacing   = 0.0
+        return stView
     }()
     
     override init(frame: CGRect) {
@@ -82,10 +100,13 @@ class SignUpView: UIView {
             make.height.equalTo(32)
         }
         
-        addSubview(signUpButton)
-        signUpButton.snp.makeConstraints { (make) in
+        addSubview(buttonsStackView)
+        buttonsStackView.snp.makeConstraints { (make) in
             make.top.equalTo(passwordTextField.snp.bottom).offset(16)
             make.centerX.equalTo(snp.centerX)
         }
+        
+        buttonsStackView.addArrangedSubview(loginButton)
+        buttonsStackView.addArrangedSubview(signUpButton)
     }
 }

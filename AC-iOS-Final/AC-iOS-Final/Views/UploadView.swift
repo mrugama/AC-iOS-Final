@@ -22,7 +22,7 @@ class UploadView: UIView {
         return button
     }()
     
-    lazy var commentTextField: UITextView = {
+    lazy var commentTextView: UITextView = {
         let text = UITextView()
         text.text = " Add a description..."
         text.textColor = UIColor.lightGray
@@ -37,6 +37,7 @@ class UploadView: UIView {
         super.init(frame: frame)
         setupInit()
         resetView()
+        commentTextView.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -47,7 +48,7 @@ class UploadView: UIView {
         uploadImageView.image = nil
         uploadButton.isHidden = false
         uploadButton.setImage(UIImage.init(named: "camera_icon"), for: .normal)
-        commentTextField.text = " Add a description..."
+        commentTextView.text = " Add a description..."
     }
     
     private func setupInit() {
@@ -65,13 +66,34 @@ class UploadView: UIView {
             make.centerX.equalTo(snp.centerX)
         }
         
-        addSubview(commentTextField)
-        commentTextField.snp.makeConstraints { (make) in
+        addSubview(commentTextView)
+        commentTextView.snp.makeConstraints { (make) in
             make.top.equalTo(uploadImageView.snp.bottom).offset(16)
             make.centerX.equalTo(snp.centerX)
-            make.width.equalTo(snp.width).multipliedBy(0.8)
+            make.left.equalTo(snp.left).offset(8)
+            make.right.equalTo(snp.right).offset(-8)
             make.bottom.equalTo(snp.bottom).offset(-16)
         }
     }
-
 }
+
+extension UploadView: UITextViewDelegate {
+    //gets rid of the fake placeholder
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = ""
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    //puts back fake placeholder if the textview.text is empty
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Add a Description.."
+            textView.textColor = UIColor.lightGray
+        }
+        textView.resignFirstResponder()
+    }
+}
+
+

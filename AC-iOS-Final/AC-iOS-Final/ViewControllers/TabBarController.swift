@@ -14,11 +14,14 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         let feedNav = UINavigationController(rootViewController: FeedVC())
         let uploadNav = UINavigationController(rootViewController: UploadVC())
-        
         feedNav.tabBarItem = UITabBarItem(title: "Feed", image: UIImage.init(named: "AppIcon"), tag: 0)
         uploadNav.tabBarItem = UITabBarItem(title: "Upload", image: UIImage.init(named: "upload"), tag: 1)
+        
         let tabList = [feedNav, uploadNav]
         viewControllers = tabList
     }
 
+    @objc private func nothing() {
+        
+    }
 }

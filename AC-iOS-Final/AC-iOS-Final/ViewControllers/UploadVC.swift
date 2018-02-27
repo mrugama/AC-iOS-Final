@@ -33,7 +33,7 @@ class UploadVC: UIViewController {
     }
     
     @objc private func saveImageSelected() {
-        guard let comment = uploadView.commentTextField.text else {print("No comment"); return}
+        guard let comment = uploadView.commentTextView.text else {print("No comment"); return}
         guard let image = uploadView.uploadImageView.image else {print("No image");return}
         PostService.manager.saveNewPost(content: comment, image: image)
         customMessage(title: "Image Saved", message: "Image saved succeed")
@@ -85,3 +85,4 @@ extension UploadVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
         picker.dismiss(animated: true, completion: nil)
     }
 }
+
