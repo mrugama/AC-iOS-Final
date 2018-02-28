@@ -52,8 +52,8 @@ class AuthUserService: NSObject {
                                 self.delegate?.didFailToEmailVerify?(self, user: user, error: error)
                                 return
                             }
+                            self.delegate?.didCreateUser?(self, user: user)
                         })
-                        self.delegate?.didCreateUser?(self, user: user)
                     }
                 })
             }

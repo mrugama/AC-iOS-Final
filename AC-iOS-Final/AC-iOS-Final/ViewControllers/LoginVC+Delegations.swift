@@ -32,8 +32,9 @@ extension LoginVC: AuthUserServiceDelegate {
     }
     
     func didCreateUser(_ userService: AuthUserService, user: User) {
-        let tabBar = TabBarController()
-        present(tabBar, animated: true, completion: nil)
+        guard let userName = user.displayName else {return}
+        guard let email = user.email else {return}
+        customErrorMessage(title: "Welcome \(userName)", message: "the user was created with \(email), please verify your email.")
     }
     
     func didFailToSignIn(_ userService: AuthUserService, error: Error) {

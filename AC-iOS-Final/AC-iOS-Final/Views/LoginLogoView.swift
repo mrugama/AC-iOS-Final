@@ -44,6 +44,7 @@ class LoginLogoView: UIView {
         guard let email = signUpView.emailTextField.text else {print("Empty email"); return}
         guard let password = signUpView.passwordTextField.text else {print("Empty password"); return}
         delegate?.didSignUpButtonPressed?(userName, email, password)
+        goBackSignInView()
     }
     
     @objc private func signInButtonPressed() {
