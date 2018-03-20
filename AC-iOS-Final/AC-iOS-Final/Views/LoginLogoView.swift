@@ -22,6 +22,15 @@ class LoginLogoView: UIView {
     var signUpView = SignUpView()
     private var authUserService = AuthUserService()
     
+    public func moveFramesToAccomodateKeyboard(with rect: CGRect, and animationDuration: Double) {
+        logoTopConstraint.constant = -(rect.height + 20)
+        UIView.animate(withDuration: animationDuration) {
+            self.layoutIfNeeded()
+        }
+    }
+    
+    private var logoTopConstraint = NSLayoutConstraint()
+    
     lazy var logoImageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
@@ -87,11 +96,17 @@ class LoginLogoView: UIView {
     
     private func setupInit() {
         addSubview(logoImageView)
-        logoImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(snp.top).offset(32)
-            make.centerX.equalTo(snp.centerX)
-            make.width.height.equalTo(snp.width).multipliedBy(0.8)
-        }
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoTopConstraint = logoImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 32)
+        logoTopConstraint.isActive = true
+        logoImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        logoImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.80).isActive = true
+        logoImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.80).isActive = true
+//        logoImageView.snp.makeConstraints { (make) in
+//            make.top.equalTo(snp.top).offset(32)
+//            make.centerX.equalTo(snp.centerX)
+//            make.width.height.equalTo(snp.width).multipliedBy(0.8)
+//        }
         
         addSubview(signUpView)
         signUpView.snp.makeConstraints { (make) in

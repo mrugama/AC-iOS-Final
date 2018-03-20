@@ -12,26 +12,62 @@ import FirebaseAuth
 
 class LoginVC: UIViewController {
     
-    var loginLogoView = LoginLogoView()
     var authUserService = AuthUserService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configViewController()
-        configLoginViews()
+        addSubviews()
+        configureConstraints()
+        addObservers()
         authUserService.delegate = self
         loginLogoView.delegate = self
     }
     
+    lazy var loginLogoView: LoginLogoView = {
+        let view = LoginLogoView()
+        return view
+    }()
+    
     private func configViewController() {
         view.backgroundColor = .white
     }
+    
+    func addObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleKeyboardShowing(sender:)),
+                                               name: NSNotification.Name.UIKeyboardWillShow,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleKeyboardHiding(sender:)),
+                                               name: NSNotification.Name.UIKeyboardWillHide,
+                                               object: nil)
+    }
+    
+    @objc func handleKeyboardShowing(sender notification: Notification) {
+        guard let infoDict = notification.userInfo else { return }
+        guard let rectFrame = infoDict[UIKeyboardFrameEndUserInfoKey] as? CGRect else { return }
+        guard let duration = infoDict[UIKeyboardAnimationDurationUserInfoKey] as? Double else { return }
+        loginLogoView.moveFramesToAccomodateKeyboard(with: rectFrame, and: duration)
+    }
+    
+    @objc func handleKeyboardHiding(sender notification: Notification) {
+        guard let infoDict = notification.userInfo else { return }
+        guard let duration = infoDict[UIKeyboardAnimationDurationUserInfoKey] as? Double else { return }
+        loginLogoView.moveFramesToAccomodateKeyboard(with: CGRect.zero, and: duration)
+    }
 
-    private func configLoginViews() {
+    func addSubviews() {
         view.addSubview(loginLogoView)
-        loginLogoView.snp.makeConstraints { (make) in
-            make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
-        }
+    }
+    
+    func configureConstraints() {
+        let safeGuide = view.safeAreaLayoutGuide
+        loginLogoView.translatesAutoresizingMaskIntoConstraints = false
+        loginLogoView.topAnchor.constraint(equalTo: safeGuide.topAnchor).isActive = true
+        loginLogoView.bottomAnchor.constraint(equalTo: safeGuide.bottomAnchor).isActive = true
+        loginLogoView.leadingAnchor.constraint(equalTo: safeGuide.leadingAnchor).isActive = true
+        loginLogoView.trailingAnchor.constraint(equalTo: safeGuide.trailingAnchor).isActive = true
     }
     
     func customErrorMessage(title: String, message: String) {

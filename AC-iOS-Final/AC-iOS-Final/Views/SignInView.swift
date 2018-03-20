@@ -15,6 +15,7 @@ class SignInView: UIView {
         let tf = UITextField()
         tf.placeholder = " Email..."
         tf.backgroundColor = UIColor.init(red: 218/255, green: 218/255, blue: 223/255, alpha: 1)
+        tf.keyboardType = .emailAddress
         tf.autocorrectionType = .no
         tf.autocapitalizationType = .none
         return tf
@@ -23,6 +24,7 @@ class SignInView: UIView {
     lazy var passwordTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = " Password.."
+        tf.keyboardType = .default
         tf.backgroundColor = UIColor.init(red: 218/255, green: 218/255, blue: 223/255, alpha: 1)
         tf.autocorrectionType = .no
         tf.autocapitalizationType = .none
@@ -36,6 +38,7 @@ class SignInView: UIView {
         button.setTitleColor(UIColor.init(red: 116/255, green: 196/255, blue: 247/255, alpha: 1), for: UIControlState.normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.showsTouchWhenHighlighted = true
         return button
     }()
     
@@ -45,6 +48,7 @@ class SignInView: UIView {
         button.setTitleColor(UIColor.init(red: 116/255, green: 196/255, blue: 247/255, alpha: 1), for: UIControlState.normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.showsTouchWhenHighlighted = true
         return button
     }()
     

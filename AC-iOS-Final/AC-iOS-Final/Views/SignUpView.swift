@@ -13,6 +13,7 @@ class SignUpView: UIView {
 
     lazy var userTextField: UITextField = {
         let tf = UITextField()
+        tf.keyboardType = .default
         tf.placeholder = "User name..."
         tf.backgroundColor = UIColor.init(red: 218/255, green: 218/255, blue: 223/255, alpha: 1)
         tf.autocorrectionType = .no
@@ -22,6 +23,7 @@ class SignUpView: UIView {
     
     lazy var emailTextField: UITextField = {
         let tf = UITextField()
+        tf.keyboardType = .emailAddress
         tf.placeholder = " Email..."
         tf.backgroundColor = UIColor.init(red: 218/255, green: 218/255, blue: 223/255, alpha: 1)
         tf.autocorrectionType = .no
@@ -31,6 +33,7 @@ class SignUpView: UIView {
     
     lazy var passwordTextField: UITextField = {
         let tf = UITextField()
+        tf.keyboardType = .default
         tf.placeholder = " Password.."
         tf.backgroundColor = UIColor.init(red: 218/255, green: 218/255, blue: 223/255, alpha: 1)
         tf.autocorrectionType = .no

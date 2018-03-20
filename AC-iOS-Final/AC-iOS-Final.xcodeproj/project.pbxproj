@@ -11,6 +11,11 @@
 		5491521A203F335F009C7138 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54915218203F335F009C7138 /* Main.storyboard */; };
 		5491521F203F335F009C7138 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5491521D203F335F009C7138 /* LaunchScreen.storyboard */; };
 		54915227203F339A009C7138 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54915226203F339A009C7138 /* Assets.xcassets */; };
+		8155273D20471ED80004C0A8 /* UploadVC+Delegations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8155273C20471ED80004C0A8 /* UploadVC+Delegations.swift */; };
+		8155273F2048BFCC0004C0A8 /* ImageSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8155273E2048BFCC0004C0A8 /* ImageSearcher.swift */; };
+		815527412048CD240004C0A8 /* PopoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815527402048CD240004C0A8 /* PopoutView.swift */; };
+		815527432048ED720004C0A8 /* SearchImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815527422048ED720004C0A8 /* SearchImageView.swift */; };
+		815527452048F13E0004C0A8 /* GoogleImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815527442048F13E0004C0A8 /* GoogleImageTableViewCell.swift */; };
 		81BB3E3A20445EAE003A25E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81BB3E3920445EAE003A25E4 /* GoogleService-Info.plist */; };
 		81BB3E41204461E0003A25E4 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BB3E40204461E0003A25E4 /* LoginVC.swift */; };
 		81BB3E442044621F003A25E4 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BB3E432044621F003A25E4 /* SignInView.swift */; };
@@ -41,6 +46,11 @@
 		54915220203F335F009C7138 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54915226203F339A009C7138 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		794E182518EF314F91F5C7CB /* Pods-AC-iOS-Final.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AC-iOS-Final.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AC-iOS-Final/Pods-AC-iOS-Final.debug.xcconfig"; sourceTree = "<group>"; };
+		8155273C20471ED80004C0A8 /* UploadVC+Delegations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadVC+Delegations.swift"; sourceTree = "<group>"; };
+		8155273E2048BFCC0004C0A8 /* ImageSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearcher.swift; sourceTree = "<group>"; };
+		815527402048CD240004C0A8 /* PopoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoutView.swift; sourceTree = "<group>"; };
+		815527422048ED720004C0A8 /* SearchImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchImageView.swift; sourceTree = "<group>"; };
+		815527442048F13E0004C0A8 /* GoogleImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleImageTableViewCell.swift; sourceTree = "<group>"; };
 		81BB3E3920445EAE003A25E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		81BB3E40204461E0003A25E4 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		81BB3E432044621F003A25E4 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -103,8 +113,6 @@
 				81BB3E3E20446180003A25E4 /* Cells */,
 				81BB3E3D20446173003A25E4 /* Views */,
 				81BB3E3B2044614C003A25E4 /* ViewControllers */,
-				54915220203F335F009C7138 /* Info.plist */,
-				81BB3E3920445EAE003A25E4 /* GoogleService-Info.plist */,
 				54915226203F339A009C7138 /* Assets.xcassets */,
 			);
 			path = "AC-iOS-Final";
@@ -118,6 +126,7 @@
 				81BB3E5220449025003A25E4 /* TabBarController.swift */,
 				81BB3E4E20448BD1003A25E4 /* FeedVC.swift */,
 				81BB3E5020448C83003A25E4 /* UploadVC.swift */,
+				8155273C20471ED80004C0A8 /* UploadVC+Delegations.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -139,6 +148,8 @@
 				81BB3E542044935E003A25E4 /* FeedView.swift */,
 				81BB3E562044936C003A25E4 /* UploadView.swift */,
 				81BB3E5E20449793003A25E4 /* PostView.swift */,
+				815527402048CD240004C0A8 /* PopoutView.swift */,
+				815527422048ED720004C0A8 /* SearchImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -147,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				81BB3E58204493CD003A25E4 /* FeedTableViewCell.swift */,
+				815527442048F13E0004C0A8 /* GoogleImageTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -157,6 +169,8 @@
 				54915218203F335F009C7138 /* Main.storyboard */,
 				54915214203F335F009C7138 /* AppDelegate.swift */,
 				5491521D203F335F009C7138 /* LaunchScreen.storyboard */,
+				81BB3E3920445EAE003A25E4 /* GoogleService-Info.plist */,
+				54915220203F335F009C7138 /* Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -168,6 +182,7 @@
 				81BB3E4A20447D00003A25E4 /* AuthUserService.swift */,
 				81BB3E6020449893003A25E4 /* ImageService.swift */,
 				81BB3E6720449C3A003A25E4 /* PostService.swift */,
+				8155273E2048BFCC0004C0A8 /* ImageSearcher.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -362,7 +377,9 @@
 				81BB3E5320449025003A25E4 /* TabBarController.swift in Sources */,
 				81BB3E48204464C8003A25E4 /* LoginLogoView.swift in Sources */,
 				81BB3E572044936C003A25E4 /* UploadView.swift in Sources */,
+				8155273D20471ED80004C0A8 /* UploadVC+Delegations.swift in Sources */,
 				81BB3E5120448C83003A25E4 /* UploadVC.swift in Sources */,
+				815527432048ED720004C0A8 /* SearchImageView.swift in Sources */,
 				81BB3E5B20449438003A25E4 /* Post.swift in Sources */,
 				81BB3E59204493CD003A25E4 /* FeedTableViewCell.swift in Sources */,
 				81BB3E462044622E003A25E4 /* SignUpView.swift in Sources */,
@@ -373,9 +390,12 @@
 				81BB3E6620449974003A25E4 /* Storage+Image.swift in Sources */,
 				81BB3E6820449C3A003A25E4 /* PostService.swift in Sources */,
 				81BB3E442044621F003A25E4 /* SignInView.swift in Sources */,
+				8155273F2048BFCC0004C0A8 /* ImageSearcher.swift in Sources */,
 				81BB3E4B20447D00003A25E4 /* AuthUserService.swift in Sources */,
+				815527452048F13E0004C0A8 /* GoogleImageTableViewCell.swift in Sources */,
 				81BB3E5F20449793003A25E4 /* PostView.swift in Sources */,
 				81BB3E41204461E0003A25E4 /* LoginVC.swift in Sources */,
+				815527412048CD240004C0A8 /* PopoutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,12 +533,14 @@
 			baseConfigurationReference = 794E182518EF314F91F5C7CB /* Pods-AC-iOS-Final.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 26RHXP32FH;
-				INFOPLIST_FILE = "AC-iOS-Final/Info.plist";
+				DEVELOPMENT_TEAM = 8E32BHD578;
+				INFOPLIST_FILE = "$(SRCROOT)/AC-iOS-Final/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "c4q.AC-iOS-Final";
+				PRODUCT_BUNDLE_IDENTIFIER = c4q.test.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -529,12 +551,14 @@
 			baseConfigurationReference = DE42021C860D433E4A1E56FF /* Pods-AC-iOS-Final.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 26RHXP32FH;
-				INFOPLIST_FILE = "AC-iOS-Final/Info.plist";
+				DEVELOPMENT_TEAM = 8E32BHD578;
+				INFOPLIST_FILE = "$(SRCROOT)/AC-iOS-Final/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "c4q.AC-iOS-Final";
+				PRODUCT_BUNDLE_IDENTIFIER = c4q.test.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

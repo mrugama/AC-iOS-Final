@@ -11,13 +11,16 @@ import UIKit
 class UploadVC: UIViewController {
 
     var uploadView = UploadView()
+    var popoutView = PopoutView()
+    var searchOnline = SearchImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configNav()
         setupUploadView()
-        uploadView.uploadButton.addTarget(self, action: #selector(openMenuPhotos), for: .touchUpInside)
+        uploadView.delegate = self
         StorageService.manager.delegate = self
+        popoutView.delegate = self
     }
 
     private func configNav() {
@@ -31,11 +34,35 @@ class UploadVC: UIViewController {
         uploadView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
         }
+        
+        view.addSubview(popoutView)
+        popoutView.snp.makeConstraints { (make) in
+            make.left.equalTo(view.snp.right)
+            make.height.equalTo(view.snp.height).multipliedBy(0.5)
+            make.centerY.equalTo(view.snp.centerY)
+            make.width.equalTo(70)
+        }
+        
+        view.addSubview(searchOnline)
+        searchOnline.snp.makeConstraints { (make) in
+            make.center.equalTo(view.safeAreaLayoutGuide.snp.center)
+            make.height.equalTo(view.safeAreaLayoutGuide.snp.height).multipliedBy(0.60)
+            make.width.equalTo(view.snp.width).multipliedBy(0.5)
+        }
+        searchOnline.backgroundColor = .white
+        searchOnline.layer.opacity = 0.4
+        searchOnline.isHidden = true
     }
     
     @objc private func saveImageSelected() {
-        guard let comment = uploadView.commentTextView.text else {print("No comment"); return}
-        guard let image = uploadView.uploadImageView.image else {print("No image");return}
+        guard let comment = uploadView.commentTextView.text else {
+            customMessage(title: "No comment", message: "Please comment the photo before you submit.")
+            return
+        }
+        guard let image = uploadView.uploadImageView.image else {
+            customMessage(title: "No photo", message: "Please pick up a photo from Library or Camara before you submit.")
+            return
+        }
         PostService.manager.saveNewPost(content: comment, image: image)
     }
     
@@ -70,29 +97,17 @@ class UploadVC: UIViewController {
         addImageActionSheet.addAction(openCamera)
         addImageActionSheet.addAction(openGallery)
         addImageActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil) )
+        UIView.animate(withDuration: 0.4, delay: 0.1, options: [.curveEaseIn, .allowUserInteraction], animations: {
+            self.popoutView.center = CGPoint(x: (self.view.center.x * 2) - 50, y: self.view.center.y)
+        }, completion: nil)
         self.present(addImageActionSheet, animated: true, completion: nil)
     }
 }
 
-// MARK:- ImagePickerController Delegate
-extension UploadVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            uploadView.uploadImageView.image = pickedImage
-            uploadView.uploadButton.isHidden = true
-        }
-        picker.dismiss(animated: true, completion: nil)
+extension UploadVC: PopoutViewDelegate {
+    func didSearchImageButtonPressed() {
+        searchOnline.isHidden = false
     }
 }
 
-extension UploadVC: StorageServiceDelegate {
-    func uploadImageProgress(progress: Float) {
-        uploadView.progressBar.isHidden = false
-        uploadView.progressBar.progress = progress
-    }
-    func didImageSave() {
-        uploadView.progressBar.isHidden = true
-        self.customMessage(title: "Image Saved", message: "Image saved succeed")
-        uploadView.resetView()
-    }
-}
+

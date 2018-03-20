@@ -8,8 +8,14 @@
 
 import UIKit
 
+@objc protocol UploadDelegate: class {
+    @objc optional func didUploadButtonPressed()
+}
+
 class UploadView: UIView {
 
+    weak var delegate: UploadDelegate?
+    
     lazy var uploadImageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
@@ -45,6 +51,11 @@ class UploadView: UIView {
         resetView()
         progressBar.isHidden = true
         commentTextView.delegate = self
+        uploadButton.addTarget(self, action: #selector(isUploadButtonPressed), for: .touchUpInside)
+    }
+    
+    @objc private func isUploadButtonPressed() {
+        delegate?.didUploadButtonPressed?()
     }
     
     required init?(coder aDecoder: NSCoder) {
